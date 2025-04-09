@@ -1,0 +1,14 @@
+.header {
+    background-color: #4CAF50; /* Green background */
+    color: white; /* White text */
+    padding: 15px; /* Padding around the header */
+    text-align: center; /* Centered text */
+    font-size: 24px; /* Larger font size */
+}
+
+@media (max-width: 600px) {
+    .header {
+        font-size: 20px; /* Smaller font size on small screens */
+        padding: 10px; /* Reduced padding on small screens */
+    }
+}

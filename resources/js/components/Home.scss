@@ -1,0 +1,37 @@
+.home {
+    display: grid;
+    grid-template-columns: 20% 80%;
+    justify-content: center;
+  
+    
+  }
+  
+  @media screen and (max-width: 992px) {
+    .home {
+      display: grid;
+      grid-template-columns: 100%;
+      justify-content: center;
+  
+      .home_sidebar {
+        display: none;
+      }
+  
+    }
+  }
+  
+  @media screen and (max-width: 767px) {
+    .home {
+      .home_main {
+      
+      }
+    }
+  }
+  
+  @media screen and (max-width: 576px) {
+    .home {
+      .home_main {
+       
+      }
+    }
+  }
+  
