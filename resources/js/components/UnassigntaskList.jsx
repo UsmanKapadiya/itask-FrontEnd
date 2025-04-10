@@ -7,6 +7,7 @@ import iconDropLeft from "../../../public/images/icon_left_dropleft.png";
 import iconDropDown from "../../../public/images/icon_left_dropdown.png";
 import { reorderData } from "./FunctionCalls";
 import $ from 'jquery';
+import TaskService from './services/taskSevice';
 
 const UnassigntaskList = (props) => {
     const [data, setData] = useState([]);
@@ -37,29 +38,37 @@ const UnassigntaskList = (props) => {
         //         "completed": (context.showCompleted !== '' ? context.showCompleted : completed)
         //     })
         // })
-        fetch("/unassign-task", {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'X-CSRF-TOKEN': `TOPEkhHmw5zZgpuhmhVahdizlWg7UqqNjSpXJsS1`,//$('meta[name="csrf-token"]').attr('content'),
-            },
-            credentials: 'include',
-            body: JSON.stringify({
-                "completed": (context.showCompleted !== '' ? context.showCompleted : completed)
-            })
-        })
-            .then(res => res.json())
-            .then(
-                (result) => {
-                    setData(result);
-                    props.updateInboxCount();
-                },
-                (error) => {
-                    console.error(error);
-                }
-            );
-
+        // fetch("/unassign-task", {
+        //     method: 'POST',
+        //     headers: {
+        //         'Accept': 'application/json',
+        //         'Content-Type': 'application/json',
+        //         'X-CSRF-TOKEN': `TOPEkhHmw5zZgpuhmhVahdizlWg7UqqNjSpXJsS1`,//$('meta[name="csrf-token"]').attr('content'),
+        //     },
+        //     credentials: 'include',
+        //     body: JSON.stringify({
+        //         "completed": (context.showCompleted !== '' ? context.showCompleted : completed)
+        //     })
+        // })
+        //     .then(res => res.json())
+        //     .then(
+        //         (result) => {
+        //             setData(result);
+        //             props.updateInboxCount();
+        //         },
+        //         (error) => {
+        //             console.error(error);
+        //         }
+        //     );
+        // const handleUnassignTask = async () => {
+            try {
+                const result =  TaskService.unassignTask("0");
+                setData(result);
+                props.updateInboxCount();
+            } catch (error) {
+                console.error(error);
+            }
+        // };
         if (context.toUpdate) {
             context.setUpdate(0);
         }

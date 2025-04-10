@@ -3,6 +3,8 @@ import notificationImage from '../../../public/images/icon_nav_notification.png'
 import { Popover, Tooltip } from "antd";
 import { Readnotification } from "./FunctionCalls";
 import ProjectContext from "./projectContext";
+import LoginServices from './services/loginservices';
+import NotificationService from './services/notificationService';
 
 const Notificationlist = () => {
     const [data, setData] = useState([]);
@@ -20,16 +22,20 @@ const Notificationlist = () => {
     }, [context.isUpdateList]);
 
     const getData = () => {
-        fetch("/notification-list")
-            .then((res) => res.json())
-            .then(
-                (result) => {
-                    setData(result);
-                },
-                (error) => {
-                    console.error("Failed to fetch notifications:", error);
-                }
-            );
+        NotificationService.getNotifications().then((res) => {
+            console.log("notifications resp",res);
+        })
+
+        // fetch("/notification-list")
+        //     .then((res) => res.json())
+        //     .then(
+        //         (result) => {
+        //             setData(result);
+        //         },
+        //         (error) => {
+        //             console.error("Failed to fetch notifications:", error);
+        //         }
+        //     );
     };
 
     const handleMarkAsRead = (e) => {

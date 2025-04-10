@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { login } from './FunctionCalls';
+// import { login } from './FunctionCalls';
+import LoginServices from './services/loginservices';
 // import { Alert } from 'reactstrap';
 
 
@@ -35,8 +36,8 @@ const LoginForm = () => {
             errors: {}
         };
 
-        login(user).then(res => {
-           debugger; console.log(res)
+        LoginServices.login(user).then((res) => {
+            // console.log("resp",resp)
             if (res.errorStatus) {
                 if (res.data.not_found === "User not Verified") {
                     window.location = "/verify-code/" + btoa(email);
@@ -48,7 +49,21 @@ const LoginForm = () => {
                 localStorage.setItem("value", btoa("1"));
                 window.location = "/Home";
             }
-        });
+        })
+        // login(user).then(res => {
+        //    debugger; console.log(res)
+            // if (res.errorStatus) {
+            //     if (res.data.not_found === "User not Verified") {
+            //         window.location = "/verify-code/" + btoa(email);
+            //     } else {
+            //         setErrors(res.data);
+            //     }
+            // } else {
+            //     localStorage.setItem("section", btoa("inbox"));
+            //     localStorage.setItem("value", btoa("1"));
+            //     window.location = "/Home";
+            // }
+        // });
     };
 
     return (

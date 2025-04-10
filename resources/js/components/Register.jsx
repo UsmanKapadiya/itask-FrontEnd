@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { register } from './FunctionCalls';
+// import { register } from './FunctionCalls';
 import Submit from "../../../public/images/btn_next.png";
 import addprofile from "../../../public/images/add_profile.png";
 import editprofile from "../../../public/images/icon_camera.png";
 import { message } from "antd";
+import LoginServices from './services/loginservices';
 
 
 
@@ -44,7 +45,7 @@ const Register = () => {
             newUser.append('avatar', state.file, state.file.name);
         }
         setState({ ...state, loading: "loading" });
-        register(newUser).then(res => {
+        LoginServices.register(newUser).then(res => {
             if (res.errorStatus) {
                 setState({ ...state, loading: "", errors: res.data });
             } else {

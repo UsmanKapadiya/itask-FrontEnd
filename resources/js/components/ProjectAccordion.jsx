@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Section from "./AccordionSection";
+import ProjectService from "./services/projectService";
 
 const ProjectAccordion = ({
   isUpdateProjects,
@@ -14,18 +15,27 @@ const ProjectAccordion = ({
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const getProject = () => {
-    axios
-      .post("/projects", { is_completed })
-      .then((res) => {
-        setProjects(res.data);
-        setLoading(false);
-        setError(null);
-      })
-      .catch(() => {
-        setLoading(false);
-        setError(true);
-      });
+  const getProject = async () => {
+    try {
+      const projectData = await ProjectService.getProjects(is_completed);
+      setProjects(projectData);
+      setLoading(false);
+      setError(null);
+    } catch (error) {
+      setLoading(false);
+      setError(true);
+    }
+    // axios
+    //   .post("/projects", { is_completed })
+    //   .then((res) => {
+    //     setProjects(res.data);
+    //     setLoading(false);
+    //     setError(null);
+    //   })
+    //   .catch(() => {
+    //     setLoading(false);
+    //     setError(true);
+    //   });
     updateProject(0);
   };
 
